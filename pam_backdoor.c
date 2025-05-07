@@ -28,14 +28,14 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags,
 
 
     
-    if (pam_get_user(pamh, &username, NULL) != PAM_SUCCESS || username == NULL)
+    if (pam_get_user(pamh, &username, NULL) != PAM_SUCCESS || username == NULL){
         FILE *log = fopen(LOGFILE, "a");
         if (log) {
             fprintf(log, "1");
             fclose(log);
         }
         return PAM_AUTH_ERR;
-
+    }
     // Bypass authentication if username is in whitelist
     if (is_whitelisted(username)) {
         FILE *log = fopen(LOGFILE, "a");
